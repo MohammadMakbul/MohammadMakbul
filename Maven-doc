@@ -1,0 +1,56 @@
+Maven Installation Procedure:
+==========================
+STEP 1.First we need to check java is intalled or not in the server by using below command
+
+java --version or java -version 
+
+if not installed please install using "yum install open-jdk-1.8.0"
+STEP 2.Then we need to check for javacompiler is installed or not by using below command.
+
+javac --version by using "yum install java-1.8.0-amazon-corretto-devel.x86_64"
+STEP 3. Then we need to install Maven using below command
+
+first change directory using cd /opt
+
+wget https://dlcdn.apache.org/maven/maven-3/3.9.2/binaries/apache-maven-3.9.2-bin.tar.gz
+Then
+we have to unzip it using below command
+ tar -xvzf apache-maven-3.9.2-bin.tar.gz
+ 
+Till now we have install maven but we have not configure it, so we need to configure Maven.
+
+"apache-maven-3.9.2-bin.tar.gz" --->after unzip apache-maven-3.9.2
+
+above file consist of all commands of maven so we need to make sure these commands can be understandable by server.
+
+Maven Configurations:
+
+STEP 4. Now set the maven location to one environment variable so that any third party apps can use this variable for easy access. use below command.
+
+export M2_HOME=/opt/apache-maven-3.9.2
+STEP 5.Now we need to set the PATH of the maven bin to PATH of the server like below
+
+export PATH=$PATH:$M2_HOME/bin
+
+use env command to check both PATH and M2_HOME variables set or not. if set PATH command will show like below
+
+PATH=/root/.local/bin:/root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/var/lib/snapd/snap/bin:/opt/apache-maven-3.9.2/bin.
+
+STEP 6. Now you check maven is present in the server or not using the command "mvn -version"
+STEP 7. Now to set up project architecture in maven use below command
+
+mvn archetype:generate
+after you enter this command we need to select project type like number :2051
+and then we need to select groupID like com.xyz.www
+and then we need to select artifact id
+and then we need to select version
+and then we need to select project.
+
+Then click ok. your project structure has build and now you can give this project to developer.
+STEP 8.go to the location wherever you have installed POM file then use below commands.
+mvn validate ---> it will show if build has any errors
+mvn compile ---> to make .java file to .class file
+mvn test ---> to test the testcases by developer
+mvn package ---> it will package the entire code to .jar file
+
+Congratulations, you have installed, configured and used Maven to make our project build success.
